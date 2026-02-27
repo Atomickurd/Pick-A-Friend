@@ -93,5 +93,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     eas: {
       projectId: 'your-eas-project-id',
     },
+    // Allow GitHub Codespaces origin in Expo's CorsMiddleware.
+    // The proxy forwards requests with Host: localhost but Origin: <codespace-domain>,
+    // which Expo blocks by default. CODESPACE_NAME is auto-set by GitHub Codespaces.
+    router: process.env.CODESPACE_NAME
+      ? {
+          origin: `https://${process.env.CODESPACE_NAME}-8081.app.github.dev`,
+          headOrigin: `https://${process.env.CODESPACE_NAME}-8081.app.github.dev`,
+        }
+      : undefined,
   },
 });
