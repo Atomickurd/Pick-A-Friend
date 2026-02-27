@@ -6,7 +6,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LostAlertCard } from '../../components/feed/LostAlertCard';

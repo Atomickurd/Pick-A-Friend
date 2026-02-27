@@ -28,6 +28,7 @@ export function Toast({
       Animated.delay(duration),
       Animated.timing(opacity, { toValue: 0, duration: 300, useNativeDriver: true }),
     ]).start(() => onHide?.());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

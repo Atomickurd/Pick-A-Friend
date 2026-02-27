@@ -106,7 +106,7 @@ export default function LoginScreen() {
           onPress={() => router.push('/auth/register')}
         >
           <Text style={styles.registerText}>
-            Don't have an account?{' '}
+            {"Don't have an account?"}{' '}
             <Text style={styles.link}>Create one</Text>
           </Text>
         </TouchableOpacity>

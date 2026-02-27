@@ -26,6 +26,7 @@ export function SkeletonLoader({
     );
     loop.start();
     return () => loop.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -82,7 +82,7 @@ export default function RegisterScreen() {
       >
         <Text style={styles.logo}>🐾</Text>
         <Text style={styles.title}>Create your account</Text>
-        <Text style={styles.subtitle}>First, let's set up your account</Text>
+        <Text style={styles.subtitle}>{"First, let's set up your account"}</Text>
 
         <View style={styles.form}>
           <Input

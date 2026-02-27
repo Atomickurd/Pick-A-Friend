@@ -7,7 +7,6 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { useRouter } from 'expo-router';
 import { EmptyState } from '../../components/shared/EmptyState';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
@@ -54,7 +53,6 @@ function CalendarEntryCard({ entry }: { entry: CalendarEntry }) {
 }
 
 export default function CalendarScreen() {
-  const router = useRouter();
   const [entries] = useState<CalendarEntry[]>([]);
 
   return (

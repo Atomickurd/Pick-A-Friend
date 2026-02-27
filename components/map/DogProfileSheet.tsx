@@ -1,6 +1,6 @@
-import React, { useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
-import BottomSheet, { BottomSheetView, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import React, { useCallback } from 'react';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import BottomSheet, { BottomSheetView, BottomSheetBackdrop, BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
@@ -24,7 +24,7 @@ export function DogProfileSheet({
   const router = useRouter();
 
   const renderBackdrop = useCallback(
-    (props: any) => (
+    (props: BottomSheetBackdropProps) => (
       <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} onPress={onClose} />
     ),
     [onClose],

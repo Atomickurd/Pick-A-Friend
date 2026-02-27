@@ -52,6 +52,7 @@ export default function FeedScreen() {
         setLoading(false);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cursor, hasMore, isLoading]);
 
   useEffect(() => {
@@ -59,6 +60,7 @@ export default function FeedScreen() {
     if (activeDog) {
       fetchMatches(activeDog.id).then(setMatches).catch(() => {});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDog?.id]);
 
   const ListHeader = (

@@ -5,7 +5,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Dimensions,
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -15,14 +14,13 @@ import { useMatching } from '../../hooks/useMatching';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
 
-const { width } = Dimensions.get('window');
-
 export default function MatchScreen() {
   const router = useRouter();
   const { stack, isLoading, error, loadMatches, swipeRight, swipeLeft } = useMatching();
 
   useEffect(() => {
     loadMatches();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleWoof() {

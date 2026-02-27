@@ -38,12 +38,12 @@ export default function PremiumScreen() {
         <Text style={styles.crown}>👑</Text>
         <Text style={styles.title}>PickAFriend Premium</Text>
         <Text style={styles.subtitle}>
-          Unlock the full potential of your dog's social life
+          {"Unlock the full potential of your dog's social life"}
         </Text>
 
         {isPremium ? (
           <View style={styles.alreadyPremium}>
-            <Text style={styles.alreadyText}>✅ You're already a Premium member!</Text>
+            <Text style={styles.alreadyText}>{"✅ You're already a Premium member!"}</Text>
           </View>
         ) : (
           <>

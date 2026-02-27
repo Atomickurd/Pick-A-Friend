@@ -20,6 +20,7 @@ export function useMatching() {
     } finally {
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDog?.id]);
 
   const swipeRight = useCallback(async () => {

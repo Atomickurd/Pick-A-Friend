@@ -29,6 +29,7 @@ export function LostPin({ dogName, onPress }: LostPinProps) {
     );
     loop.start();
     return () => loop.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

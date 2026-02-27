@@ -11,7 +11,6 @@ export function encodeGeohash(lat: number, lng: number, precision = 9): string {
     maxLng = 180;
   let hash = '';
   let bits = 0,
-    bitsTotal = 0,
     charIdx = 0,
     even = true;
 
@@ -37,7 +36,6 @@ export function encodeGeohash(lat: number, lng: number, precision = 9): string {
     }
     even = !even;
     bits++;
-    bitsTotal++;
     if (bits === 5) {
       hash += BASE32[charIdx];
       bits = 0;

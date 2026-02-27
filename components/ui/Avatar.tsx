@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, ViewStyle } from 'react-native';
+import { View, Image, Text, StyleSheet, ViewStyle, ImageStyle, StyleProp } from 'react-native';
 import { COLORS } from '../../constants/colors';
 
 interface AvatarProps {
   uri?: string | null;
   name?: string;
   size?: number;
-  style?: ViewStyle;
+  style?: StyleProp<ImageStyle>;
 }
 
 export function Avatar({ uri, name, size = 48, style }: AvatarProps) {
@@ -20,7 +20,7 @@ export function Avatar({ uri, name, size = 48, style }: AvatarProps) {
         .toUpperCase()
     : '?';
 
-  const containerStyle: ViewStyle = {
+  const containerStyle: ImageStyle = {
     width: size,
     height: size,
     borderRadius: size / 2,
@@ -38,7 +38,7 @@ export function Avatar({ uri, name, size = 48, style }: AvatarProps) {
   }
 
   return (
-    <View style={[containerStyle, styles.placeholder, style]}>
+    <View style={[containerStyle as ViewStyle, styles.placeholder, style as ViewStyle]}>
       <Text style={[styles.initials, { fontSize: size * 0.38 }]}>{initials}</Text>
     </View>
   );

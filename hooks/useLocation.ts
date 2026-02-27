@@ -61,5 +61,6 @@ export function useLocation() {
       mounted = false;
       watchRef.current?.remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDog?.id, user?.uid, user?.privacySettings.showOnMap]);
 }

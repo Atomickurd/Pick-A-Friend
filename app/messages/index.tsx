@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { where, orderBy, limit } from 'firebase/firestore';
 import { Avatar } from '../../components/ui/Avatar';
 import { EmptyState } from '../../components/shared/EmptyState';
 import { fsQuery } from '../../services/firebase/firestore';
@@ -25,7 +26,6 @@ export default function MessagesListScreen() {
 
   useEffect(() => {
     if (!user) return;
-    const { where, orderBy, limit } = require('firebase/firestore');
     const unsub = fsQuery<MessageChannel>(
       'message_channels',
       [
@@ -39,6 +39,7 @@ export default function MessagesListScreen() {
       },
     );
     return unsub;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.uid]);
 
   if (loading) {

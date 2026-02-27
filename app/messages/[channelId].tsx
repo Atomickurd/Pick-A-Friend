@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { orderBy, limit } from 'firebase/firestore';
 import { fsQuery, fsSet } from '../../services/firebase/firestore';
 import { useUserStore } from '../../store/user';
 import { COLORS } from '../../constants/colors';
@@ -28,7 +29,6 @@ export default function ChatScreen() {
 
   useEffect(() => {
     if (!channelId) return;
-    const { orderBy, limit, where } = require('firebase/firestore');
     const unsub = fsQuery<Message>(
       `message_channels/${channelId}/messages`,
       [orderBy('createdAt', 'desc'), limit(100)],

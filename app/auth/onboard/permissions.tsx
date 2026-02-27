@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useRouter } from 'expo-router';
 import * as Location from 'expo-location';
-import * as Notifications from 'expo-notifications';
 import { Button } from '../../../components/ui/Button';
 import { COLORS } from '../../../constants/colors';
 import { SPACING } from '../../../constants/spacing';

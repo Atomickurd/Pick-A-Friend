@@ -11,7 +11,6 @@ import { FilterBar } from '../../components/map/FilterBar';
 import { DogProfileSheet } from '../../components/map/DogProfileSheet';
 import { listenNearbyDogLocations } from '../../services/firebase/firestore';
 import { encodeGeohash } from '../../services/geohash';
-import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
 import type { DogProfile, DogLocation, MatchScore } from '../../types';
 
@@ -35,11 +34,14 @@ export default function MapScreen() {
   const [selectedMatchScore, setSelectedMatchScore] = useState<MatchScore | null>(null);
 
   // Subscribe to nearby dog locations
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!region) return;
     const geohashPrefix = encodeGeohash(region.latitude, region.longitude, 6);
     const unsub = listenNearbyDogLocations(geohashPrefix, setDogLocations);
     return unsub;
+  // Re-subscribe when the tile changes (floored lat/lng)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Math.floor(region.latitude * 100), Math.floor(region.longitude * 100)]);
 
   function handleDogPinPress(loc: DogLocation) {

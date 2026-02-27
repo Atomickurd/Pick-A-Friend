@@ -13,7 +13,6 @@ import { Button } from '../../../components/ui/Button';
 import { Input } from '../../../components/ui/Input';
 import { COLORS } from '../../../constants/colors';
 import { SPACING } from '../../../constants/spacing';
-import { BREEDS } from '../../../constants/breeds';
 import { useDogStore } from '../../../store/dog';
 import { useUserStore } from '../../../store/user';
 import { uploadFile } from '../../../services/firebase/storage';

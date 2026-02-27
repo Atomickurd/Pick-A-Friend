@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { Text, StyleSheet, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '../../../components/ui/Button';
 import { Input } from '../../../components/ui/Input';
@@ -42,7 +42,7 @@ export default function OwnerScreen() {
       <ScrollView style={styles.screen} contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <Text style={styles.stepIndicator}>Step 4 of 5</Text>
         <Text style={styles.title}>Where are you based? 📍</Text>
-        <Text style={styles.subtitle}>We'll use this to find local dogs and events.</Text>
+        <Text style={styles.subtitle}>{"We'll use this to find local dogs and events."}</Text>
 
         <Input label="City *" value={city} onChangeText={setCity} placeholder="London" autoCapitalize="words" />
         <Input label="Neighbourhood" value={neighbourhood} onChangeText={setNeighbourhood} placeholder="Hackney" autoCapitalize="words" hint="Optional — helps find even more local dogs" />

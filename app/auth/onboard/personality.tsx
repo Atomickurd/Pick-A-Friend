@@ -40,7 +40,7 @@ export default function PersonalityScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.container}>
       <Text style={styles.stepIndicator}>Step 2 of 5</Text>
-      <Text style={styles.title}>What's their personality? 🎭</Text>
+      <Text style={styles.title}>{"What's their personality? 🎭"}</Text>
       <Text style={styles.subtitle}>
         Pick up to {MAX_TRAITS} traits ({selected.length}/{MAX_TRAITS})
       </Text>
