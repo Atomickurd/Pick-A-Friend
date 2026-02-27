@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  # ── PostgreSQL (local dev) ────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: paf-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: paf
+      POSTGRES_PASSWORD: paf_dev_secret
+      POSTGRES_DB: pickafriend
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U paf -d pickafriend']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── API Server (local dev) ────────────────────────────────────────────────
+  api:
+    build:
+      context: ./api-server
+      target: builder
+    container_name: paf-api
+    restart: unless-stopped
+    working_dir: /app
+    command: npx tsx watch src/index.ts
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      DATABASE_URL: postgresql://paf:paf_dev_secret@postgres:5432/pickafriend
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-pickafriend-dev}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-sk_test_placeholder}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-whsec_placeholder}
+      CORS_ORIGIN: '*'
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./api-server/src:/app/src
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

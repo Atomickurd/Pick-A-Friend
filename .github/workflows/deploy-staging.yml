@@ -1,0 +1,84 @@
+name: Deploy — Staging
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy-api-staging:
+    name: Deploy API to Staging (Cloud Run)
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build & push Docker image
+        run: |
+          gcloud builds submit api-server/ \
+            --tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/pickafriend-api:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy pickafriend-api-staging \
+            --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/pickafriend-api:${{ github.sha }} \
+            --region europe-west1 \
+            --platform managed \
+            --set-env-vars DATABASE_URL=${{ secrets.STAGING_DATABASE_URL }} \
+            --set-env-vars FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }} \
+            --set-env-vars STRIPE_SECRET_KEY=${{ secrets.STAGING_STRIPE_SECRET_KEY }} \
+            --set-env-vars STRIPE_WEBHOOK_SECRET=${{ secrets.STAGING_STRIPE_WEBHOOK_SECRET }} \
+            --allow-unauthenticated
+
+  deploy-functions-staging:
+    name: Deploy Cloud Functions to Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    defaults:
+      run:
+        working-directory: functions
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - run: npm ci && npm run build
+
+      - name: Deploy functions
+        run: |
+          npx firebase-tools deploy \
+            --only functions \
+            --project ${{ secrets.FIREBASE_PROJECT_ID }} \
+            --token ${{ secrets.FIREBASE_TOKEN }}
+
+  build-expo-staging:
+    name: Build Expo (EAS) — Staging
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+      - name: Build for internal distribution
+        run: eas build --platform all --profile preview --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
