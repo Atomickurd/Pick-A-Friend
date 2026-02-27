@@ -55,3 +55,19 @@ export const Colors = {
 } as const;
 
 export type ColorKey = keyof typeof Colors;
+
+/** Semantic alias used throughout components */
+export const COLORS = {
+  primary: Colors.purple,
+  primaryLight: Colors.lightPurple,
+  secondary: Colors.teal,
+  secondaryLight: Colors.lightTeal,
+  text: Colors.dark,
+  textLight: Colors.midGray,
+  background: Colors.background,
+  surface: Colors.white,
+  border: Colors.border,
+  error: Colors.red,
+  success: Colors.green,
+  warning: Colors.amber,
+} as const;

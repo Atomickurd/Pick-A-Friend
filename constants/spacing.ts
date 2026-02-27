@@ -39,3 +39,6 @@ export const FontWeight = {
 export const TouchTarget = {
   min: 44,
 } as const;
+
+/** Alias used in components */
+export const SPACING = Spacing;
