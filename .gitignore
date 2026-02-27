@@ -1,0 +1,36 @@
+node_modules/
+.expo/
+dist/
+.env.local
+.env.staging
+.env.production
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+google-services.json
+GoogleService-Info.plist
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# API server
+api-server/dist/
+api-server/node_modules/
+api-server/.env
+
+# Functions
+functions/lib/
+functions/node_modules/
+functions/.env
