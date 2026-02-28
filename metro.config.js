@@ -11,6 +11,7 @@ const config = getDefaultConfig(__dirname);
 // stub so the bundle compiles. At runtime, these are native-only code paths
 // that are never executed on web anyway.
 const EMPTY_STUB = path.resolve(__dirname, 'web-stubs/empty.js');
+const RNM_STUB = path.resolve(__dirname, 'web-stubs/react-native-maps.js');
 
 // react-native-web provides Platform, redirect react-native internal references
 // to it so Platform.OS / Platform.select() work correctly on web.
@@ -30,6 +31,11 @@ config.resolver = {
   ...config.resolver,
   resolveRequest: (context, moduleName, platform) => {
     if (platform === 'web') {
+      // Stub native-only packages that crash at module load time on web.
+      if (moduleName === 'react-native-maps') {
+        return { filePath: RNM_STUB, type: 'sourceFile' };
+      }
+
       const fromRN = context.originModulePath.includes(
         '/node_modules/react-native/Libraries/'
       );
