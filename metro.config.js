@@ -14,9 +14,15 @@ const EMPTY_STUB = path.resolve(__dirname, 'web-stubs/empty.js');
 
 // react-native-web provides Platform, redirect react-native internal references
 // to it so Platform.OS / Platform.select() work correctly on web.
-const RNW_PLATFORM = require.resolve(
-  'react-native-web/dist/exports/Platform/index.js'
-);
+let RNW_PLATFORM;
+try {
+  RNW_PLATFORM = require.resolve(
+    'react-native-web/dist/exports/Platform/index.js'
+  );
+} catch (_) {
+  // react-native-web not installed or different internal layout; fall back to stub.
+  RNW_PLATFORM = EMPTY_STUB;
+}
 
 const originalResolveRequest = config.resolver?.resolveRequest;
 
