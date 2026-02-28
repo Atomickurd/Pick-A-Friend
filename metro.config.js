@@ -35,6 +35,12 @@ config.resolver = {
       if (moduleName === 'react-native-maps') {
         return { filePath: RNM_STUB, type: 'sourceFile' };
       }
+      if (moduleName === '@stripe/stripe-react-native') {
+        return {
+          filePath: path.resolve(__dirname, 'web-stubs/stripe-react-native.js'),
+          type: 'sourceFile',
+        };
+      }
 
       const fromRN = context.originModulePath.includes(
         '/node_modules/react-native/Libraries/'
