@@ -4,7 +4,8 @@
 // compiles and the map screen simply shows nothing on web.
 const React = require('react');
 
-const Noop = () => null;
+// Use forwardRef so callers can attach a ref without React warnings.
+const Noop = React.forwardRef((_props, _ref) => null);
 
 const MapView = Noop;
 MapView.Animated = Noop;
