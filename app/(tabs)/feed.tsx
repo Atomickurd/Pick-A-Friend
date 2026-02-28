@@ -37,6 +37,9 @@ export default function FeedScreen() {
         setItems(page.items);
         setCursor(page.cursor);
         setHasMore(page.hasMore);
+      } catch {
+        // Backend not yet deployed — show empty feed rather than crashing.
+        setHasMore(false);
       } finally {
         setRefreshing(false);
       }
@@ -48,6 +51,8 @@ export default function FeedScreen() {
         appendItems(page.items);
         setCursor(page.cursor);
         setHasMore(page.hasMore);
+      } catch {
+        setHasMore(false);
       } finally {
         setLoading(false);
       }
