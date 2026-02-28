@@ -14,6 +14,7 @@ import { EmptyState } from '../../components/shared/EmptyState';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
 import type { LostReport, AdoptionDog } from '../../types';
+import { MOCK_LOST_REPORTS, MOCK_ADOPTION_DOGS } from '../../services/mockData';
 
 type Tab = 'lost_found' | 'adoption';
 
@@ -21,9 +22,8 @@ export default function SocialScreen() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<Tab>('lost_found');
 
-  // Placeholder data — replaced by real API calls in prod
-  const lostReports: LostReport[] = [];
-  const adoptionDogs: AdoptionDog[] = [];
+  const lostReports: LostReport[] = MOCK_LOST_REPORTS;
+  const adoptionDogs: AdoptionDog[] = MOCK_ADOPTION_DOGS;
 
   return (
     <SafeAreaView style={styles.screen}>

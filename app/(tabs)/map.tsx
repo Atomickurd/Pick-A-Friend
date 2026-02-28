@@ -10,6 +10,7 @@ import { LostPin } from '../../components/map/LostPin';
 import { FilterBar } from '../../components/map/FilterBar';
 import { DogProfileSheet } from '../../components/map/DogProfileSheet';
 import { listenNearbyDogLocations } from '../../services/firebase/firestore';
+import { MOCK_MAP_PINS } from '../../services/mockData';
 import { encodeGeohash } from '../../services/geohash';
 import { SPACING } from '../../constants/spacing';
 import type { DogProfile, DogLocation, MatchScore } from '../../types';
@@ -25,13 +26,19 @@ export default function MapScreen() {
   const mapRef = useRef<MapView>(null);
   const sheetRef = useRef<BottomSheet>(null);
 
-  const { pins, filter, showBusinesses, showLostDogs, setSelectedPinId } = useMapStore();
+  const { pins, filter, showBusinesses, showLostDogs, setSelectedPinId, setPins } = useMapStore();
   const user = useUserStore((s) => s.user);
 
   const [region, setRegion] = useState(INITIAL_REGION);
   const [dogLocations, setDogLocations] = useState<DogLocation[]>([]);
   const [selectedDog, setSelectedDog] = useState<DogProfile | null>(null);
   const [selectedMatchScore, setSelectedMatchScore] = useState<MatchScore | null>(null);
+
+  // Seed business and lost-dog pins from mock data on first mount.
+  useEffect(() => {
+    if (pins.length === 0) setPins(MOCK_MAP_PINS);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Subscribe to nearby dog locations
   // eslint-disable-next-line react-hooks/exhaustive-deps

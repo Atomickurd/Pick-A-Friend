@@ -1,4 +1,5 @@
 import { apiClient } from './client';
+import { MOCK_FEED_PAGE } from '../mockData';
 import type { Post } from '../../types';
 
 export interface FeedPage {
@@ -8,10 +9,15 @@ export interface FeedPage {
 }
 
 export async function fetchFeed(cursor?: string | null): Promise<FeedPage> {
-  const { data } = await apiClient.get<FeedPage>('/feed', {
-    params: cursor ? { cursor } : undefined,
-  });
-  return data;
+  try {
+    const { data } = await apiClient.get<FeedPage>('/feed', {
+      params: cursor ? { cursor } : undefined,
+    });
+    return data;
+  } catch {
+    // Backend not yet deployed — return mock data.
+    return MOCK_FEED_PAGE;
+  }
 }
 
 export async function createPost(

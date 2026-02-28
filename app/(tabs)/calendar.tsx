@@ -11,6 +11,7 @@ import { EmptyState } from '../../components/shared/EmptyState';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
 import type { CalendarEntry } from '../../types';
+import { MOCK_CALENDAR_ENTRIES } from '../../services/mockData';
 
 const CATEGORY_EMOJI: Record<string, string> = {
   playdate: '🐕',
@@ -53,7 +54,7 @@ function CalendarEntryCard({ entry }: { entry: CalendarEntry }) {
 }
 
 export default function CalendarScreen() {
-  const [entries] = useState<CalendarEntry[]>([]);
+  const [entries] = useState<CalendarEntry[]>(MOCK_CALENDAR_ENTRIES);
 
   return (
     <SafeAreaView style={styles.screen}>
