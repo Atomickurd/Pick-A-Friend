@@ -9,6 +9,9 @@ const Noop = () => null;
 const MapView = Noop;
 MapView.Animated = Noop;
 
+// __esModule must be true so Babel's interopRequireDefault returns
+// exports.default (the Noop fn) rather than the whole exports object.
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.default = MapView;
 exports.MapView = MapView;
 exports.Marker = Noop;
@@ -21,4 +24,3 @@ exports.Overlay = Noop;
 exports.Heatmap = Noop;
 exports.PROVIDER_GOOGLE = 'google';
 exports.PROVIDER_DEFAULT = null;
-module.exports = exports;
