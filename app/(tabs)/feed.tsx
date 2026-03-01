@@ -19,6 +19,7 @@ import { fetchMatches } from '../../services/api/matching';
 import { useDogStore, selectActiveDog } from '../../store/dog';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 import type { Post } from '../../types';
 import type { MatchResult } from '../../services/api/matching';
 import { useState } from 'react';
@@ -153,11 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 6,
+    ...makeShadow(3, 8, 0.25, 6),
   },
   fabIcon: { fontSize: 22 },
 });

@@ -13,6 +13,7 @@ import { listenNearbyDogLocations } from '../../services/firebase/firestore';
 import { MOCK_MAP_PINS } from '../../services/mockData';
 import { encodeGeohash } from '../../services/geohash';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 import type { DogProfile, DogLocation, MatchScore } from '../../types';
 
 const INITIAL_REGION = {
@@ -201,11 +202,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.95)',
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    ...makeShadow(2, 8, 0.1, 4),
   },
   recenterBtn: {
     position: 'absolute',
@@ -217,11 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 4,
+    ...makeShadow(2, 6, 0.15, 4),
   },
   recenterIcon: { fontSize: 22 },
 });

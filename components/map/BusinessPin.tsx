@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '../../constants/colors';
+import { makeShadow } from '../../constants/shadow';
 import type { BusinessCategory } from '../../types';
 
 const CATEGORY_EMOJI: Record<BusinessCategory, string> = {
@@ -43,11 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.businessPin,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
+    ...makeShadow(2, 4, 0.2, 4),
   },
   emoji: { fontSize: 20 },
   label: {

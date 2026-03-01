@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Avatar } from '../ui/Avatar';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 import { reactToPost } from '../../services/api/feed';
 import type { Post, ReactionType } from '../../types';
 
@@ -125,11 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: SPACING.md,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 2,
+    ...makeShadow(1, 4, 0.06, 2),
   },
   header: {
     flexDirection: 'row',

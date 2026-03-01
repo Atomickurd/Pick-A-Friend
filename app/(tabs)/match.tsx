@@ -13,6 +13,7 @@ import { EmptyState } from '../../components/shared/EmptyState';
 import { useMatching } from '../../hooks/useMatching';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 
 export default function MatchScreen() {
   const router = useRouter();
@@ -124,11 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
+    ...makeShadow(3, 6, 0.2, 4),
   },
   skipBtn: { backgroundColor: '#fff' },
   woofBtn: { backgroundColor: COLORS.primary },

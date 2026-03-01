@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 import type { MatchResult } from '../../services/api/matching';
 
 const { width } = Dimensions.get('window');
@@ -139,11 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     backgroundColor: COLORS.surface,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    elevation: 6,
+    ...makeShadow(4, 12, 0.2, 6),
   },
   photo: { width: '100%', height: '100%', position: 'absolute' },
   badge: {

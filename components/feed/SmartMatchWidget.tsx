@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'rea
 import { useRouter } from 'expo-router';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
+import { makeShadow } from '../../constants/shadow';
 import type { MatchResult } from '../../services/api/matching';
 
 interface SmartMatchWidgetProps {
@@ -53,11 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: SPACING.md,
     paddingTop: SPACING.md,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 4,
-    elevation: 2,
+    ...makeShadow(1, 4, 0.06, 2),
   },
   widgetHeader: {
     flexDirection: 'row',
