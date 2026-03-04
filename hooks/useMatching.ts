@@ -35,7 +35,11 @@ export function useMatching() {
     if (stack.length === 0) return;
     const [current, ...rest] = stack;
     setStack(rest);
-    await dismissMatch(current.match.targetDogId);
+    try {
+      await dismissMatch(current.match.targetDogId);
+    } catch {
+      // Backend not yet deployed — ignore dismiss errors silently.
+    }
     if (rest.length < 3) loadMatches();
   }, [stack, loadMatches]);
 
