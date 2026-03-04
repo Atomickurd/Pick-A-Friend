@@ -26,7 +26,11 @@ export const useFeedStore = create<FeedState>()((set) => ({
   hasMore: true,
 
   setItems: (items) => set({ items }),
-  appendItems: (items) => set((s) => ({ items: [...s.items, ...items] })),
+  appendItems: (items) =>
+    set((s) => {
+      const seen = new Set(s.items.map((i) => i.id));
+      return { items: [...s.items, ...items.filter((i) => !seen.has(i.id))] };
+    }),
   updateItem: (id, partial) =>
     set((s) => ({
       items: s.items.map((i) => (i.id === id ? { ...i, ...partial } : i)),

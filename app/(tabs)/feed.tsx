@@ -45,10 +45,12 @@ export default function FeedScreen() {
         setRefreshing(false);
       }
     } else {
-      if (isLoading || !hasMore) return;
+      // Read fresh store state to avoid stale-closure races with onEndReached.
+      const { isLoading: loading, hasMore: more, cursor: cur } = useFeedStore.getState();
+      if (loading || !more) return;
       setLoading(true);
       try {
-        const page = await fetchFeed(cursor);
+        const page = await fetchFeed(cur);
         appendItems(page.items);
         setCursor(page.cursor);
         setHasMore(page.hasMore);
@@ -59,7 +61,7 @@ export default function FeedScreen() {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursor, hasMore, isLoading]);
+  }, []);
 
   useEffect(() => {
     load(true);
