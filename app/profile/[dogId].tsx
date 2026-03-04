@@ -15,6 +15,7 @@ import { Button } from '../../components/ui/Button';
 import { PremiumGate } from '../../components/shared/PremiumGate';
 import { fsGet } from '../../services/firebase/firestore';
 import { apiClient } from '../../services/api/client';
+import { MOCK_DOGS } from '../../services/mockData';
 import { COLORS } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
 import type { DogProfile, PawRequest } from '../../types';
@@ -30,7 +31,7 @@ export default function DogProfileScreen() {
   useEffect(() => {
     if (!dogId) return;
     fsGet<DogProfile>(`dogs/${dogId}`)
-      .then(setDog)
+      .then((d) => setDog(d ?? MOCK_DOGS.find((m) => m.id === dogId) ?? null))
       .finally(() => setLoading(false));
   }, [dogId]);
 
